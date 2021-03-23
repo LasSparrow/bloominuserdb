@@ -65,13 +65,7 @@ function updateUser(id, data, callback) {
 
   let query = `
   UPDATE users
-  SET FirstName = ?
-  SET LastName = ?
-  SET Email = ?
-  SET Password = ?
-  SET Username = ?
-  SET Birthday = ?
-  SET FavoritePlant = ?
+  SET FirstName = ?, LastName = ?, Email = ?, Password = ?, Username = ?, Birthday = ?, FavoritePlant = ?
   WHERE id = ?
   `
 

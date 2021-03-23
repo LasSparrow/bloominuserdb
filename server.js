@@ -63,7 +63,6 @@ app.post('/api/users/', (req, res) => {
 })
 
 
-
 app.delete('/api/users/:id', (req, res) => {
   const id = req.params.id;
 
