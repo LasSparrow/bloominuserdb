@@ -66,10 +66,16 @@ function updateUser(id, data, callback) {
   let query = `
   UPDATE users
   SET FirstName = ?
+  SET LastName = ?
+  SET Email = ?
+  SET Password = ?
+  SET Username = ?
+  SET Birthday = ?
+  SET FavoritePlant = ?
   WHERE id = ?
   `
 
-  let params = [data.FirstName, id]
+  let params = [data.FirstName, data.LastName, data.Email, data.Password, data.Username, data.Birthday, data.FavoritePlant, id]
 
   connection.query(query, params, (error, result) => {
     callback(error, result)
