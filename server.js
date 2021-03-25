@@ -288,3 +288,68 @@ app.patch('/api/photos/:id', (req, res) => {
 //     res.send({ result })
 //   })
 // })
+
+
+
+// COMMENTS DATABASE
+
+app.get('/api/comments', (req, res) => {
+  database.allComments((error, comments) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+    // 3
+    res.send({ comments })
+  })
+})
+
+app.post('/api/comments/', (req, res) => {
+  const comment = req.body
+  // 1
+  database.createComment(comment, (error, commentId) => {
+    const comment = req.body
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+
+    comment.id = commentId;
+
+    // 4
+    res.send({ comment })
+  })
+})
+
+app.delete('/api/comments/:id', (req, res) => {
+  const id = req.params.id;
+
+  database.deleteComment(id, (error, result) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+
+    //4
+    res.send({ result })
+  })
+})
+
+app.use(express.json())
+app.patch('/api/comments/:id', (req, res) => {
+  const id = req.params.id
+  const commentData = req.body
+
+  database.updateComment(id, commentData, (error, result) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+    //4
+    res.send({ result })
+  })
+})

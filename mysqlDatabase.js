@@ -291,3 +291,75 @@ exports.updatePhoto = updatePhoto
 
 // }
 // exports.updateLike = updateLike
+
+
+
+
+// COMMENTS DATABASE
+
+// 3
+function allComments(callback) {
+  const query = `
+    SELECT * 
+    FROM comments
+  `
+  connection.query(query, null, (error, results) => {
+    callback(error, results)
+  })
+}
+exports.allComments = allComments
+
+
+function createComment(comment, callback) {
+  // 1
+  const query = `
+    INSERT INTO comments (CommentContent, CommentDate, CommentNumber, PhotoID, UserID)
+    VALUES (?, ?, ?, ?, ?)
+  `
+
+  // 2
+  const params = [comment.CommentContent, comment.CommentDate, comment.CommentNumber, photo.PhotoID, user.UserID]
+
+  // 3
+  connection.query(query, params, function (error, result) {
+    callback(error, result)
+  })
+}
+exports.createComment = createComment
+
+
+function deleteComment(commentId, callback) {
+
+  //1
+  let query = `
+  DELETE FROM comment
+  WHERE id = ?
+  `
+
+  //2
+  let params = [commentId, callback]
+
+  //3
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+}
+exports.deleteComment = deleteComment
+
+
+function updateComment(id, data, callback) {
+
+  let query = `
+  UPDATE comment
+  SET CommentContent = ?, CommentDate = ?, CommentNumber = ?, UserID = ?, PostID = ?
+  WHERE id = ?
+  `
+
+  let params = [data.CommentContent, data.CommentDate, data.CommentNumber, data.UserID, data.PostID, id]
+
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+
+}
+exports.updateComment = updateComment
