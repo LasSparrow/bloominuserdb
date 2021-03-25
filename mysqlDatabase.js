@@ -11,6 +11,8 @@ const dbDetails = {
 }
 const connection = mysql.createConnection(dbDetails);
 
+// USER DATABASE
+
 // 3
 function allUsers(callback) {
   const query = `
@@ -77,3 +79,73 @@ function updateUser(id, data, callback) {
 
 }
 exports.updateUser = updateUser
+
+
+// POSTS DATABASE
+
+// 3
+function allPosts(callback) {
+  const query = `
+    SELECT * 
+    FROM posts
+  `
+  connection.query(query, null, (error, results) => {
+    callback(error, results)
+  })
+}
+exports.allPosts = allPosts
+
+
+function createPost(post, callback) {
+  // 1
+  const query = `
+    INSERT INTO posts (PostDate, UserID)
+    VALUES (?, ?)
+  `
+
+  // 2
+  const params = [post.PostDate, user.UserID]
+
+  // 3
+  connection.query(query, params, function (error, result) {
+    callback(error, result)
+  })
+}
+exports.createPost = createPost
+
+
+function deletePost(postId, callback) {
+
+  //1
+  let query = `
+  DELETE FROM posts
+  WHERE id = ?
+  `
+
+  //2
+  let params = [postId, callback]
+
+  //3
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+}
+exports.deletePost = deletePost
+
+
+function updatePost(id, data, callback) {
+
+  let query = `
+  UPDATE posts
+  SET PostDate = ?, UserID = ?
+  WHERE id = ?
+  `
+
+  let params = [data.PostDate, data.UserID, id]
+
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+
+}
+exports.updatePost = updatePost
