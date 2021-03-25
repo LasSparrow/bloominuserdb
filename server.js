@@ -25,6 +25,8 @@ app.use('/', function (req, res, next) {
 app.use(express.json())
 
 
+// USERS DATABASE
+
 app.get('/api/users', (req, res) => {
   database.allUsers((error, users) => {
     // 2
@@ -36,7 +38,6 @@ app.get('/api/users', (req, res) => {
     res.send({ users })
   })
 })
-
 
 const port = process.env.PORT || 3306
 app.listen(port, () => {
@@ -84,6 +85,71 @@ app.patch('/api/users/:id', (req, res) => {
   const userData = req.body
 
   database.updateUser(id, userData, (error, result) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+    //4
+    res.send({ result })
+  })
+})
+
+
+
+// POSTS DATABASE
+
+app.get('/api/posts', (req, res) => {
+  database.allPosts((error, posts) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+    // 3
+    res.send({ posts })
+  })
+})
+
+app.post('/api/posts/', (req, res) => {
+  const post = req.body
+  // 1
+  database.createPost(post, (error, postId) => {
+    const post = req.body
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+
+    post.id = postId;
+
+    // 4
+    res.send({ post })
+  })
+})
+
+app.delete('/api/posts/:id', (req, res) => {
+  const id = req.params.id;
+
+  database.deletePost(id, (error, result) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+
+    //4
+    res.send({ result })
+  })
+})
+
+app.use(express.json())
+app.patch('/api/posts/:id', (req, res) => {
+  const id = req.params.id
+  const postData = req.body
+
+  database.updateUser(id, postData, (error, result) => {
     // 2
     if (error) {
       res.send({ error })
