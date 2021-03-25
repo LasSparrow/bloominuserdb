@@ -149,7 +149,71 @@ app.patch('/api/posts/:id', (req, res) => {
   const id = req.params.id
   const postData = req.body
 
-  database.updateUser(id, postData, (error, result) => {
+  database.updatePost(id, postData, (error, result) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+    //4
+    res.send({ result })
+  })
+})
+
+
+// PHOTOS DATABASE
+
+app.get('/api/photos', (req, res) => {
+  database.allPhotos((error, photos) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+    // 3
+    res.send({ photos })
+  })
+})
+
+app.post('/api/photos/', (req, res) => {
+  const photo = req.body
+  // 1
+  database.createPhoto(photo, (error, photoId) => {
+    const photo = req.body
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+
+    photo.id = photoId;
+
+    // 4
+    res.send({ photo })
+  })
+})
+
+app.delete('/api/photos/:id', (req, res) => {
+  const id = req.params.id;
+
+  database.deletePhoto(id, (error, result) => {
+    // 2
+    if (error) {
+      res.send({ error })
+      return
+    }
+
+    //4
+    res.send({ result })
+  })
+})
+
+app.use(express.json())
+app.patch('/api/photos/:id', (req, res) => {
+  const id = req.params.id
+  const photoData = req.body
+
+  database.updatePhoto(id, photoData, (error, result) => {
     // 2
     if (error) {
       res.send({ error })

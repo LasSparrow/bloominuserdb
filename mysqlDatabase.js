@@ -11,7 +11,7 @@ const dbDetails = {
 }
 const connection = mysql.createConnection(dbDetails);
 
-// USER DATABASE
+// USERS DATABASE
 
 // 3
 function allUsers(callback) {
@@ -149,3 +149,74 @@ function updatePost(id, data, callback) {
 
 }
 exports.updatePost = updatePost
+
+
+
+// PHOTOS DATABASE
+
+// 3
+function allPhotos(callback) {
+  const query = `
+    SELECT * 
+    FROM photos
+  `
+  connection.query(query, null, (error, results) => {
+    callback(error, results)
+  })
+}
+exports.allPhotos = allPhotos
+
+
+function createPhoto(photo, callback) {
+  // 1
+  const query = `
+    INSERT INTO photos (PhotoUrl, PhotoCaption, PostID)
+    VALUES (?, ?, ?)
+  `
+
+  // 2
+  const params = [photo.PhotoUrl, photo.PhotoCaption, post.PostID]
+
+  // 3
+  connection.query(query, params, function (error, result) {
+    callback(error, result)
+  })
+}
+exports.createPhoto = createPhoto
+
+
+function deletePhoto(photoId, callback) {
+
+  //1
+  let query = `
+  DELETE FROM photo
+  WHERE id = ?
+  `
+
+  //2
+  let params = [photoId, callback]
+
+  //3
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+}
+exports.deletePhoto = deletePhoto
+
+
+function updatePhoto(id, data, callback) {
+
+  let query = `
+  UPDATE photo
+  SET PhotoUrl = ?, PhotoCaption = ?, PostID = ?
+  WHERE id = ?
+  `
+
+  let params = [data.PhotoUrl, data.PhotoCaption, data.PostID, id]
+
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+
+}
+exports.updatePhoto = updatePhoto
