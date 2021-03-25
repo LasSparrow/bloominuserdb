@@ -226,65 +226,65 @@ app.patch('/api/photos/:id', (req, res) => {
 
 
 
-// LIKES DATABASE
+// // LIKES DATABASE
 
-app.get('/api/likes', (req, res) => {
-  database.allLikes((error, likes) => {
-    // 2
-    if (error) {
-      res.send({ error })
-      return
-    }
-    // 3
-    res.send({ likes })
-  })
-})
+// app.get('/api/likes', (req, res) => {
+//   database.allLikes((error, likes) => {
+//     // 2
+//     if (error) {
+//       res.send({ error })
+//       return
+//     }
+//     // 3
+//     res.send({ likes })
+//   })
+// })
 
-app.post('/api/likes/', (req, res) => {
-  const like = req.body
-  // 1
-  database.createLike(like, (error, likeId) => {
-    const like = req.body
-    // 2
-    if (error) {
-      res.send({ error })
-      return
-    }
+// app.post('/api/likes/', (req, res) => {
+//   const like = req.body
+//   // 1
+//   database.createLike(like, (error, likeId) => {
+//     const like = req.body
+//     // 2
+//     if (error) {
+//       res.send({ error })
+//       return
+//     }
 
-    like.id = likeId;
+//     like.id = likeId;
 
-    // 4
-    res.send({ like })
-  })
-})
+//     // 4
+//     res.send({ like })
+//   })
+// })
 
-app.delete('/api/likes/:id', (req, res) => {
-  const id = req.params.id;
+// app.delete('/api/likes/:id', (req, res) => {
+//   const id = req.params.id;
 
-  database.deleteLike(id, (error, result) => {
-    // 2
-    if (error) {
-      res.send({ error })
-      return
-    }
+//   database.deleteLike(id, (error, result) => {
+//     // 2
+//     if (error) {
+//       res.send({ error })
+//       return
+//     }
 
-    //4
-    res.send({ result })
-  })
-})
+//     //4
+//     res.send({ result })
+//   })
+// })
 
-app.use(express.json())
-app.patch('/api/likes/:id', (req, res) => {
-  const id = req.params.id
-  const likeData = req.body
+// app.use(express.json())
+// app.patch('/api/likes/:id', (req, res) => {
+//   const id = req.params.id
+//   const likeData = req.body
 
-  database.updateLike(id, likeData, (error, result) => {
-    // 2
-    if (error) {
-      res.send({ error })
-      return
-    }
-    //4
-    res.send({ result })
-  })
-})
+//   database.updateLike(id, likeData, (error, result) => {
+//     // 2
+//     if (error) {
+//       res.send({ error })
+//       return
+//     }
+//     //4
+//     res.send({ result })
+//   })
+// })

@@ -223,71 +223,71 @@ exports.updatePhoto = updatePhoto
 
 
 
-// LIKES DATABASE
+// // LIKES DATABASE
 
-// 3
-function allLikes(callback) {
-  const query = `
-    SELECT * 
-    FROM likes
-  `
-  connection.query(query, null, (error, results) => {
-    callback(error, results)
-  })
-}
-exports.allLike = allLike
-
-
-function createLike(like, callback) {
-  // 1
-  const query = `
-    INSERT INTO likes (LikeNumber, PostID, UserID)
-    VALUES (?, ?, ?)
-  `
-
-  // 2
-  const params = [like.LikeNumber, post.PostID, user.UserID]
-
-  // 3
-  connection.query(query, params, function (error, result) {
-    callback(error, result)
-  })
-}
-exports.createLike = createLike
+// // 3
+// function allLikes(callback) {
+//   const query = `
+//     SELECT * 
+//     FROM likes
+//   `
+//   connection.query(query, null, (error, results) => {
+//     callback(error, results)
+//   })
+// }
+// exports.allLike = allLike
 
 
-function deleteLike(likeId, callback) {
+// function createLike(like, callback) {
+//   // 1
+//   const query = `
+//     INSERT INTO likes (LikeNumber, PostID, UserID)
+//     VALUES (?, ?, ?)
+//   `
 
-  //1
-  let query = `
-  DELETE FROM like
-  WHERE id = ?
-  `
+//   // 2
+//   const params = [like.LikeNumber, post.PostID, user.UserID]
 
-  //2
-  let params = [likeId, callback]
-
-  //3
-  connection.query(query, params, (error, result) => {
-    callback(error, result)
-  })
-}
-exports.deleteLike = deleteLike
+//   // 3
+//   connection.query(query, params, function (error, result) {
+//     callback(error, result)
+//   })
+// }
+// exports.createLike = createLike
 
 
-function updateLike(id, data, callback) {
+// function deleteLike(likeId, callback) {
 
-  let query = `
-  UPDATE like
-  SET LikeNumber = ?, PostID = ?, UserID = ?
-  WHERE id = ?
-  `
+//   //1
+//   let query = `
+//   DELETE FROM like
+//   WHERE id = ?
+//   `
 
-  let params = [data.LikeNumber, data.PostID, data.UserID, id]
+//   //2
+//   let params = [likeId, callback]
 
-  connection.query(query, params, (error, result) => {
-    callback(error, result)
-  })
+//   //3
+//   connection.query(query, params, (error, result) => {
+//     callback(error, result)
+//   })
+// }
+// exports.deleteLike = deleteLike
 
-}
-exports.updateLike = updateLike
+
+// function updateLike(id, data, callback) {
+
+//   let query = `
+//   UPDATE like
+//   SET LikeNumber = ?, PostID = ?, UserID = ?
+//   WHERE id = ?
+//   `
+
+//   let params = [data.LikeNumber, data.PostID, data.UserID, id]
+
+//   connection.query(query, params, (error, result) => {
+//     callback(error, result)
+//   })
+
+// }
+// exports.updateLike = updateLike
