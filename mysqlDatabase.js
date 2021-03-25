@@ -220,3 +220,74 @@ function updatePhoto(id, data, callback) {
 
 }
 exports.updatePhoto = updatePhoto
+
+
+
+// LIKES DATABASE
+
+// 3
+function allLikes(callback) {
+  const query = `
+    SELECT * 
+    FROM likes
+  `
+  connection.query(query, null, (error, results) => {
+    callback(error, results)
+  })
+}
+exports.allLike = allLike
+
+
+function createLike(like, callback) {
+  // 1
+  const query = `
+    INSERT INTO likes (LikeNumber, PostID, UserID)
+    VALUES (?, ?, ?)
+  `
+
+  // 2
+  const params = [like.LikeNumber, post.PostID, user.UserID]
+
+  // 3
+  connection.query(query, params, function (error, result) {
+    callback(error, result)
+  })
+}
+exports.createLike = createLike
+
+
+function deleteLike(likeId, callback) {
+
+  //1
+  let query = `
+  DELETE FROM like
+  WHERE id = ?
+  `
+
+  //2
+  let params = [likeId, callback]
+
+  //3
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+}
+exports.deleteLike = deleteLike
+
+
+function updateLike(id, data, callback) {
+
+  let query = `
+  UPDATE like
+  SET LikeNumber = ?, PostID = ?, UserID = ?
+  WHERE id = ?
+  `
+
+  let params = [data.LikeNumber, data.PostID, data.UserID, id]
+
+  connection.query(query, params, (error, result) => {
+    callback(error, result)
+  })
+
+}
+exports.updateLike = updateLike
