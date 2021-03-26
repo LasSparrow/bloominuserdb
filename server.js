@@ -9,6 +9,9 @@ app.use('/', function (req, res, next) {
   console.log(origin);
   if(allowedOrigins.indexOf(origin) > -1){}
 
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+  header("Access-Control-Allow-Headers: Authorization");
   res.setHeader('Access-Control-Allow-Origin', origin || "*");
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
