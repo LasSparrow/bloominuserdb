@@ -314,12 +314,12 @@ exports.allComments = allComments
 function createComment(comment, userID, callback) {
   // 1
   const query = `
-    INSERT INTO Comments (CommentContent, CommentNumber, PostID, UserID)
+    INSERT INTO Comments (CommentContent, PostID, UserID)
     VALUES (?, ?, ?, ?)
   `
 
   // 2
-  const params = [comment.CommentContent, comment.CommentNumber, comment.postID, userID]
+  const params = [comment.CommentContent, comment.postID, userID]
 
   // 3
   connection.query(query, params, function (error, result) {
@@ -352,11 +352,11 @@ function updateComment(id, data, callback) {
 
   let query = `
   UPDATE Comment
-  SET CommentContent = ?, CommentDate = ?, CommentNumber = ?, UserID = ?, PostID = ?
+  SET CommentContent = ?, CommentDate = ?, UserID = ?, PostID = ?
   WHERE id = ?
   `
 
-  let params = [data.CommentContent, data.CommentDate, data.CommentNumber, data.UserID, data.PostID, id]
+  let params = [data.CommentContent, data.CommentDate, data.UserID, data.PostID, id]
 
   connection.query(query, params, (error, result) => {
     callback(error, result)
