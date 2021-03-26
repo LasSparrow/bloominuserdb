@@ -4,7 +4,7 @@ const database = require('./mysqlDatabase')
 
 const app = express()
 app.use('/', function (req, res, next) {
-  //var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', "https://*"];
+  var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', "https://*"];
   var origin = req.headers.origin;
   //console.log(origin);
   /*if(allowedOrigins.indexOf(origin) > -1){
