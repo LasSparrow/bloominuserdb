@@ -23,6 +23,24 @@ app.use('/', function (req, res, next) {
 app.use(express.json())
 
 
+app.get('/token', function(req, res){
+  var token = jwt.sign({username:Username}, 'supersecret',{expiresIn: 120});
+  res.send(token)
+})
+
+// Register a route that requires a valid token to view data
+app.get('/api', function(req, res){
+  var token = req.query.token;
+  jwt.verify(token, 'supersecret', function(err, decoded){
+    if(!err){
+      var secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};
+      res.json(secrets);
+    } else {
+      res.send(err);
+    }
+  })
+})
+
 // USERS DATABASE
 
 app.get('/api/users', (req, res) => {
