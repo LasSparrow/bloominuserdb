@@ -302,7 +302,7 @@ app.get('/api/comments', (req, res) => {
   })
 })
 
-app.post('/api/comments/', (req, res) => {
+app.post('/api/comments', (req, res) => {
   const comment = req.body
   // 1
   database.createComment(comment, (error, commentId) => {
