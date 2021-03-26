@@ -315,7 +315,7 @@ function createComment(comment, userID, callback) {
   // 1
   const query = `
     INSERT INTO Comments (CommentContent, PostID, UserID)
-    VALUES (?, ?, ?, ?)
+    VALUES (?, ?, ?)
   `
 
   // 2
