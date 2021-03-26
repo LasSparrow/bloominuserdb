@@ -29,12 +29,12 @@ exports.allUsers = allUsers
 function createUser(user, callback) {
   // 1
   const query = `
-    INSERT INTO Users (FirstName, LastName, Email, Password, Username, Birthday, FavoritePlant)
+    INSERT INTO Users (FirstName, LastName, Email, Pass, Username, Birthday, FavoritePlant)
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `
 
   // 2
-  const params = [user.FirstName, user.LastName, user.Email, user.Password, user.Username, user.Birthday, user.FavoritePlant]
+  const params = [user.FirstName, user.LastName, user.Email, user.Pass, user.Username, user.Birthday, user.FavoritePlant]
 
   // 3
   connection.query(query, params, function (error, result) {
@@ -67,11 +67,11 @@ function updateUser(id, data, callback) {
 
   let query = `
   UPDATE Users
-  SET FirstName = ?, LastName = ?, Email = ?, Password = ?, Username = ?, Birthday = ?, FavoritePlant = ?
+  SET FirstName = ?, LastName = ?, Email = ?, Pass = ?, Username = ?, Birthday = ?, FavoritePlant = ?
   WHERE id = ?
   `
 
-  let params = [data.FirstName, data.LastName, data.Email, data.Password, data.Username, data.Birthday, data.FavoritePlant, id]
+  let params = [data.FirstName, data.LastName, data.Email, data.Pass, data.Username, data.Birthday, data.FavoritePlant, id]
 
   connection.query(query, params, (error, result) => {
     callback(error, result)
