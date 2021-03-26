@@ -1,4 +1,5 @@
 const express = require('express')
+var jwt = require('jsonwebtoken');
 const database = require('./mysqlDatabase')
 
 
@@ -290,8 +291,9 @@ app.patch('/api/photos/:id', (req, res) => {
 
 // COMMENTS DATABASE
 
-app.get('/api/comments', (req, res) => {
-  database.allComments((error, comments) => {
+app.get('/api/comments/:postId', (req, res) => {
+  const {postId} = req.params;
+  database.allComments(postId, (error, comments) => {
     // 2
     if (error) {
       res.send({ error })
@@ -305,7 +307,12 @@ app.get('/api/comments', (req, res) => {
 app.post('/api/comments', (req, res) => {
   const comment = req.body
   // 1
-  database.createComment(comment, (error, commentId) => {
+
+  //get the userId from the token, get the post id from the frontend/req.body/comment
+  //jwt to verify token to get userId,
+
+  const userId = 1; //replace with token user id when verifying token is complete
+  database.createComment(comment, userId, (error, commentId) => {
     // const comment = req.body
     // 2
     if (error) {

@@ -298,27 +298,28 @@ exports.updatePhoto = updatePhoto
 // COMMENTS DATABASE
 
 // 3
-function allComments(callback) {
+function allComments(postID, callback) {
   const query = `
     SELECT * 
     FROM Comments
+    WHERE PostID = ?
   `
-  connection.query(query, null, (error, results) => {
+  connection.query(query, [postID], (error, results) => {
     callback(error, results)
   })
 }
 exports.allComments = allComments
 
 
-function createComment(comment, callback) {
+function createComment(comment, userID, callback) {
   // 1
   const query = `
-    INSERT INTO Comments (CommentContent, CommentDate, CommentNumber, PhotoID, UserID)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO Comments (CommentContent, CommentNumber, PostID, UserID)
+    VALUES (?, ?, ?, ?)
   `
 
   // 2
-  const params = [comment.CommentContent, comment.CommentDate, comment.CommentNumber, photo.PhotoID, user.UserID]
+  const params = [comment.CommentContent, comment.CommentNumber, comment.postID, userID]
 
   // 3
   connection.query(query, params, function (error, result) {
