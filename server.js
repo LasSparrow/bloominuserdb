@@ -42,7 +42,7 @@ app.listen(port, () => {
 })
 
 
-app.post('/api/users/', (req, res) => {
+app.post('/api/users', (req, res) => {
   const user = req.body
   // 1
   database.createUser(user, (error, userId) => {
@@ -108,7 +108,7 @@ app.get('/api/posts', (req, res) => {
   })
 })
 
-app.post('/api/posts/', (req, res) => {
+app.post('/api/posts', (req, res) => {
   const post = req.body
   // 1
   database.createPost(post, (error, postId) => {
@@ -172,7 +172,7 @@ app.get('/api/photos', (req, res) => {
   })
 })
 
-app.post('/api/photos/', (req, res) => {
+app.post('/api/photos', (req, res) => {
   const photo = req.body
   // 1
   database.createPhoto(photo, (error, photoId) => {

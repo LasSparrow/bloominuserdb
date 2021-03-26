@@ -17,7 +17,7 @@ const connection = mysql.createConnection(dbDetails);
 function allUsers(callback) {
   const query = `
     SELECT * 
-    FROM users
+    FROM Users
   `
   connection.query(query, null, (error, results) => {
     callback(error, results)
@@ -29,7 +29,7 @@ exports.allUsers = allUsers
 function createUser(user, callback) {
   // 1
   const query = `
-    INSERT INTO users (FirstName, LastName, Email, Password, Username, Birthday, FavoritePlant)
+    INSERT INTO Users (FirstName, LastName, Email, Password, Username, Birthday, FavoritePlant)
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `
 
@@ -48,7 +48,7 @@ function deleteUser(userId, callback) {
 
   //1
   let query = `
-  DELETE FROM users
+  DELETE FROM Users
   WHERE id = ?
   `
 
@@ -66,7 +66,7 @@ exports.deleteUser = deleteUser
 function updateUser(id, data, callback) {
 
   let query = `
-  UPDATE users
+  UPDATE Users
   SET FirstName = ?, LastName = ?, Email = ?, Password = ?, Username = ?, Birthday = ?, FavoritePlant = ?
   WHERE id = ?
   `
@@ -87,7 +87,7 @@ exports.updateUser = updateUser
 function allPosts(callback) {
   const query = `
     SELECT * 
-    FROM posts
+    FROM Posts
   `
   connection.query(query, null, (error, results) => {
     callback(error, results)
@@ -99,7 +99,7 @@ exports.allPosts = allPosts
 function createPost(post, callback) {
   // 1
   const query = `
-    INSERT INTO posts (PostDate, UserID)
+    INSERT INTO Posts (PostDate, UserID)
     VALUES (?, ?)
   `
 
@@ -118,7 +118,7 @@ function deletePost(postId, callback) {
 
   //1
   let query = `
-  DELETE FROM posts
+  DELETE FROM Posts
   WHERE id = ?
   `
 
@@ -136,7 +136,7 @@ exports.deletePost = deletePost
 function updatePost(id, data, callback) {
 
   let query = `
-  UPDATE posts
+  UPDATE Posts
   SET PostDate = ?, UserID = ?
   WHERE id = ?
   `
@@ -158,7 +158,7 @@ exports.updatePost = updatePost
 function allPhotos(callback) {
   const query = `
     SELECT * 
-    FROM photos
+    FROM Photos
   `
   connection.query(query, null, (error, results) => {
     callback(error, results)
@@ -170,7 +170,7 @@ exports.allPhotos = allPhotos
 function createPhoto(photo, callback) {
   // 1
   const query = `
-    INSERT INTO photos (PhotoUrl, PhotoCaption, PostID)
+    INSERT INTO Photos (PhotoUrl, PhotoCaption, PostID)
     VALUES (?, ?, ?)
   `
 
@@ -189,7 +189,7 @@ function deletePhoto(photoId, callback) {
 
   //1
   let query = `
-  DELETE FROM photo
+  DELETE FROM Photo
   WHERE id = ?
   `
 
@@ -207,7 +207,7 @@ exports.deletePhoto = deletePhoto
 function updatePhoto(id, data, callback) {
 
   let query = `
-  UPDATE photo
+  UPDATE Photo
   SET PhotoUrl = ?, PhotoCaption = ?, PostID = ?
   WHERE id = ?
   `
@@ -301,7 +301,7 @@ exports.updatePhoto = updatePhoto
 function allComments(callback) {
   const query = `
     SELECT * 
-    FROM comments
+    FROM Comments
   `
   connection.query(query, null, (error, results) => {
     callback(error, results)
@@ -313,7 +313,7 @@ exports.allComments = allComments
 function createComment(comment, callback) {
   // 1
   const query = `
-    INSERT INTO comments (CommentContent, CommentDate, CommentNumber, PhotoID, UserID)
+    INSERT INTO Comments (CommentContent, CommentDate, CommentNumber, PhotoID, UserID)
     VALUES (?, ?, ?, ?, ?)
   `
 
@@ -332,7 +332,7 @@ function deleteComment(commentId, callback) {
 
   //1
   let query = `
-  DELETE FROM comment
+  DELETE FROM Comment
   WHERE id = ?
   `
 
@@ -350,7 +350,7 @@ exports.deleteComment = deleteComment
 function updateComment(id, data, callback) {
 
   let query = `
-  UPDATE comment
+  UPDATE Comment
   SET CommentContent = ?, CommentDate = ?, CommentNumber = ?, UserID = ?, PostID = ?
   WHERE id = ?
   `
