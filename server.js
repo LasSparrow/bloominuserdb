@@ -3,20 +3,20 @@ const database = require('./mysqlDatabase')
 
 
 const app = express()
-app.use('/', function (req, res, next) {
-  var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', 'http://localhost:8080', "https://*"];
-  var origin = req.headers.origin;
-  console.log(origin);
-  if(allowedOrigins.indexOf(origin) > -1){}
+// app.use('/', function (req, res, next) {
+//   var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', 'http://localhost:8080', "https://*"];
+//   var origin = req.headers.origin;
+//   console.log(origin);
+//   if(allowedOrigins.indexOf(origin) > -1){}
 
-  // res.setHeader('Access-Control-Allow-Origin', origin || "*");
-  // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  // res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
-  // // Set to true if you need the website to include cookies in the requests sent
-  // // to the API (e.g. in case you use sessions)
-  // res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+//   // res.setHeader('Access-Control-Allow-Origin', origin || "*");
+//   // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//   // res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+//   // // Set to true if you need the website to include cookies in the requests sent
+//   // // to the API (e.g. in case you use sessions)
+//   // res.setHeader('Access-Control-Allow-Credentials', true);
+//   next();
+// });
 
 
 app.use(express.json())
@@ -46,7 +46,7 @@ app.post('/api/users/', (req, res) => {
   const user = req.body
   // 1
   database.createUser(user, (error, userId) => {
-    const user = req.body
+    // const user = req.body
     // 2
     if (error) {
       res.send({ error })
@@ -112,7 +112,7 @@ app.post('/api/posts/', (req, res) => {
   const post = req.body
   // 1
   database.createPost(post, (error, postId) => {
-    const post = req.body
+    // const post = req.body
     // 2
     if (error) {
       res.send({ error })
@@ -176,7 +176,7 @@ app.post('/api/photos/', (req, res) => {
   const photo = req.body
   // 1
   database.createPhoto(photo, (error, photoId) => {
-    const photo = req.body
+    // const photo = req.body
     // 2
     if (error) {
       res.send({ error })
@@ -306,7 +306,7 @@ app.post('/api/comments/', (req, res) => {
   const comment = req.body
   // 1
   database.createComment(comment, (error, commentId) => {
-    const comment = req.body
+    // const comment = req.body
     // 2
     if (error) {
       res.send({ error })
