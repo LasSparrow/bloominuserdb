@@ -46,7 +46,7 @@ app.listen(port, () => {
 app.post('/api/users', (req, res) => {
   const user = req.body
   // 1
-  database.createUser(user, (error, userId) => {
+  database.createUser(user, (error, userID) => {
     // const user = req.body
     // 2
     if (error) {
@@ -54,7 +54,7 @@ app.post('/api/users', (req, res) => {
       return
     }
 
-    user.id = userId;
+    user.id = userID;
 
     // 4
     res.send({ user })
@@ -112,7 +112,7 @@ app.get('/api/posts', (req, res) => {
 app.post('/api/posts', (req, res) => {
   const post = req.body
   // 1
-  database.createPost(post, (error, postId) => {
+  database.createPost(post, (error, postID) => {
     // const post = req.body
     // 2
     if (error) {
@@ -120,7 +120,7 @@ app.post('/api/posts', (req, res) => {
       return
     }
 
-    post.id = postId;
+    post.id = postID;
 
     // 4
     res.send({ post })
@@ -291,9 +291,9 @@ app.patch('/api/photos/:id', (req, res) => {
 
 // COMMENTS DATABASE
 
-app.get('/api/comments/:postId', (req, res) => {
-  const {postId} = req.params;
-  database.allComments(postId, (error, comments) => {
+app.get('/api/comments/:postID', (req, res) => {
+  const {postID} = req.params;
+  database.allComments(postID, (error, comments) => {
     // 2
     if (error) {
       res.send({ error })
@@ -311,8 +311,8 @@ app.post('/api/comments', (req, res) => {
   //get the userId from the token, get the post id from the frontend/req.body/comment
   //jwt to verify token to get userId,
 
-  const userId = 1; //replace with token user id when verifying token is complete
-  database.createComment(comment, userId, (error, commentId) => {
+  const userID = 1; //replace with token user id when verifying token is complete
+  database.createComment(comment, userID, (error, commentId) => {
     // const comment = req.body
     // 2
     if (error) {

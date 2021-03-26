@@ -114,7 +114,7 @@ function createPost(post, callback) {
 exports.createPost = createPost
 
 
-function deletePost(postId, callback) {
+function deletePost(postID, callback) {
 
   //1
   let query = `
@@ -123,7 +123,7 @@ function deletePost(postId, callback) {
   `
 
   //2
-  let params = [postId, callback]
+  let params = [postID, callback]
 
   //3
   connection.query(query, params, (error, result) => {
