@@ -4,10 +4,10 @@ const database = require('./mysqlDatabase')
 
 const app = express()
 app.use('/', function (req, res, next) {
-  // var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', 'http://localhost:8080', "https://*"];
-  // var origin = req.headers.origin;
-  // console.log(origin);
-  // if(allowedOrigins.indexOf(origin) > -1){}
+  var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', 'http://localhost:8080', "https://*"];
+  var origin = req.headers.origin;
+  console.log(origin);
+  if(allowedOrigins.indexOf(origin) > -1){}
 
   // res.setHeader('Access-Control-Allow-Origin', origin || "*");
   // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
