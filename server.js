@@ -200,11 +200,11 @@ app.patch('/api/posts/:id', (req, res) => {
 
 // PHOTOS DATABASE
 
-app.get('/api/photos', (req, res) => {
+app.get('./api/photos', (req, res) => {
   
 })
 
-app.post('/api/photos', upload.single('image'), (req, res) => {
+app.post('./api/photos', upload.single('image'), (req, res) => {
   console.log(req.file)
   const description = req.body.description
   res.send("jazz")
