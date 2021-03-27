@@ -7,7 +7,7 @@ const upload = multer({dest: 'uploads/'})
 
 const app = express()
 app.use('/', function (req, res, next) {
-  var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', 'http://localhost:8080'];
+  var allowedOrigins = ['http://localhost:3000'];
   var origin = req.headers.origin;
   console.log(origin);
   if(allowedOrigins.indexOf(origin) > -1){}
