@@ -1,5 +1,5 @@
 const express = require('express')
-var jwt = require('jsonwebtoken');
+const jwt = require('./jwt')
 const database = require('./mysqlDatabase')
 
 
@@ -22,22 +22,26 @@ app.use('/', function (req, res, next) {
 
 app.use(express.json())
 
-app.get('/token', function(req, res){
-  var token = jwt.sign({Email:Email}, 'supersecret',{expiresIn: 120});
-  res.send(token)
+app.post('/login', function(req, res) {
+    
+  // get the user from the database
+
+  // Create an jwt from the user details and send the token back to the client
+  const accessToken = jwt.generateToken({id: user.id, username: user.username})
+  res.send({ accessToken: accessToken })
 })
 
-app.get('/login', function(req, res){
-  var token = req.query.token;
-  jwt.verify(token, 'supersecret', function(err, decoded){
-    if(!err){
-      var secrets = {"accountNumber" : "938291239","pin" : "11289","account" : "Finance"};
-      res.json(secrets);
-    } else {
-      res.send(err);
-    }
-  })
+// Create a new user
+app.post('/login', function(req, res) {
+  // save the user to the database
+
+  // Create an jwt from the user details and send the token back to the client
+  const accessToken = jwt.generateToken({id: user.id, username: user.username})
+  res.send({ accessToken: accessToken })
 })
+
+
+
 
 
 
