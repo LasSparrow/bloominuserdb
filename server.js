@@ -7,12 +7,12 @@ const upload = multer({dest: 'uploads/'})
 
 const app = express()
 app.use('/', function (req, res, next) {
-  var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', 'http://localhost:8080', "https://*"];
+  var allowedOrigins = ['http://localhost:3000', 'http://localhost:6006', 'http://localhost:8080'];
   var origin = req.headers.origin;
   console.log(origin);
   if(allowedOrigins.indexOf(origin) > -1){}
 
-  res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigins);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
   // Set to true if you need the website to include cookies in the requests sent
@@ -37,12 +37,12 @@ app.post('/users', async (req, res) =>{
 
 
 app.post('/login', async (req, res) =>{
-      const user = users.find(user => user.Email === req.body.Email)
+      const user = users.find(user => users.Email === req.body.Email)
     if (user == null) {
       return res.status(400).send('Cannot find user')
     }
     try {
-      if(await bcrypt.compare(req.body.Pass, user.Pass)) {
+      if(await bcrypt.compare(req.body.Pass, users.Pass)) {
         res.sendStatus('Success')
       } else {
         res.send('Not Allowed')
