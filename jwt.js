@@ -7,3 +7,4 @@ function generateToken(data) {
   return token
 }
 exports.generateToken = generateToken
+//test
