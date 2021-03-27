@@ -37,20 +37,23 @@ app.post('/api/users', async (req, res) =>{
 
 
 app.post('/login', async (req, res) =>{
-      const user = users.find(user => users.Email === req.body.Email)
-    if (user == null) {
-      return res.status(400).send('Cannot find user')
-    }
-    try {
-      if(await bcrypt.compare(req.body.Pass, users.Pass)) {
-        res.sendStatus('Success')
-      } else {
-        res.send('Not Allowed')
-      }
-    } catch {
-      res.status(500).send()
-    }
+
+    //   const user = users.find(user => users.Email === req.body.Email)
+    // if (user == null) {
+    //   return res.status(400).send('Cannot find user')
+    // }
+    // try {
+    //   if(await bcrypt.compare(req.body.Pass, users.Pass)) {
+    //     res.sendStatus('Success')
+    //   } else {
+    //     res.send('Not Allowed')
+    //   }
+    // } catch {
+    //   res.status(500).send()
+    // }
   // get the user from the database
+  const username = req.body.Username
+  const user = {Username:Username}
 
   // Create an jwt from the user details and send the token back to the client
   const accessToken = jwt.generateToken({Email: user.Email, Pass: user.Pass})
