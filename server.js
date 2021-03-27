@@ -210,10 +210,10 @@ app.post('/api/photos', upload.single('image'), (req, res) => {
   res.send("jazz")
 })
 
-const port = process.env.PORT || 8080
-app.listen(port, () => {
-  console.log(`listening on port ${port}`)
-})
+// const port = process.env.PORT || 8080
+// app.listen(port, () => {
+//   console.log(`listening on port ${port}`)
+// })
 // update of photos get&post
 // app.get('/api/photos', (req, res) => {
 //   database.allPhotos((error, photos) => {
