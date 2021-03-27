@@ -22,14 +22,12 @@ app.use('/', function (req, res, next) {
 
 app.use(express.json())
 
-
 app.get('/token', function(req, res){
-  var token = jwt.sign({username:Username}, 'supersecret',{expiresIn: 120});
+  var token = jwt.sign({Email:Email}, 'supersecret',{expiresIn: 120});
   res.send(token)
 })
 
-// Register a route that requires a valid token to view data
-app.get('/api', function(req, res){
+app.get('/login', function(req, res){
   var token = req.query.token;
   jwt.verify(token, 'supersecret', function(err, decoded){
     if(!err){
@@ -40,6 +38,8 @@ app.get('/api', function(req, res){
     }
   })
 })
+
+
 
 // USERS DATABASE
 
