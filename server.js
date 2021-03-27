@@ -199,12 +199,12 @@ app.patch('/api/posts/:id', (req, res) => {
 
 
 // PHOTOS DATABASE
-
-app.get('/photos', (req, res) => {
+app.use(express.json())
+app.get('/api/photos', (req, res) => {
 
 })
 
-app.post('/photos', upload.single('image'), (req, res) => {
+app.post('/api/photos', upload.single('image'), (req, res) => {
   console.log(req.file)
   const description = req.body.description
   res.send("jazz")
