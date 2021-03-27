@@ -1,6 +1,7 @@
 const express = require('express')
 const jwt = require('./jwt')
 const database = require('./mysqlDatabase')
+const bcrypt = require('bcrypt')
 
 
 const app = express()
@@ -22,13 +23,37 @@ app.use('/', function (req, res, next) {
 
 app.use(express.json())
 
-app.post('/login', function(req, res) {
-    
+app.post('/users', async (req, res) =>{
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.Pass, 10)
+    const user = {Email: req.body.Email, Pass: hashedPassword}
+    users.push(user)
+    res.status(201).send()
+  } catch {
+    res.status(500).send()
+  }
+})
+
+
+app.post('/users/login', async (req, res) =>{
+      const user = users.find(user => user.Email === req.body.Email)
+    if (user == null) {
+      return res.status(400).send('Cannot find user')
+    }
+    try {
+      if(await bcrypt.compare(req.body.Pass, user.Pass)) {
+        res.sendStatus('Success')
+      } else {
+        res.send('Not Allowed')
+      }
+    } catch {
+      res.status(500).send()
+    }
   // get the user from the database
 
   // Create an jwt from the user details and send the token back to the client
-  const accessToken = jwt.generateToken({Email: user.Email, Pass: user.Pass})
-  res.send({ accessToken: accessToken })
+  // const accessToken = jwt.generateToken({Email: user.Email, Pass: user.Pass})
+  // res.send({ accessToken: accessToken })
 })
 
 
