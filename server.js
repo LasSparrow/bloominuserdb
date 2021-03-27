@@ -2,7 +2,8 @@ const express = require('express')
 const jwt = require('./jwt')
 const database = require('./mysqlDatabase')
 const bcrypt = require('bcrypt')
-
+const multer = require('multer')
+const upload = multer({dest: 'uploads/'})
 
 const app = express()
 app.use('/', function (req, res, next) {
@@ -199,35 +200,48 @@ app.patch('/api/posts/:id', (req, res) => {
 
 // PHOTOS DATABASE
 
-app.get('/api/photos', (req, res) => {
-  database.allPhotos((error, photos) => {
-    // 2
-    if (error) {
-      res.send({ error })
-      return
-    }
-    // 3
-    res.send({ photos })
-  })
+app.get('/photos', (req, res) => {
+  
 })
 
-app.post('/api/photos', (req, res) => {
-  const photo = req.body
-  // 1
-  database.createPhoto(photo, (error, photoId) => {
-    // const photo = req.body
-    // 2
-    if (error) {
-      res.send({ error })
-      return
-    }
-
-    photo.id = photoId;
-
-    // 4
-    res.send({ photo })
-  })
+app.post('/photos', upload.single('image'), (req, res) => {
+  res.send("jazz")
 })
+
+const port = process.env.PORT || 8080
+app.listen(port, () => {
+  console.log(`listening on port ${port}`)
+})
+// update of photos get&post
+// app.get('/api/photos', (req, res) => {
+//   database.allPhotos((error, photos) => {
+//     // 2
+//     if (error) {
+//       res.send({ error })
+//       return
+//     }
+//     // 3
+//     res.send({ photos })
+//   })
+// })
+
+// app.post('/api/photos', (req, res) => {
+//   const photo = req.body
+//   // 1
+//   database.createPhoto(photo, (error, photoId) => {
+//     // const photo = req.body
+//     // 2
+//     if (error) {
+//       res.send({ error })
+//       return
+//     }
+
+//     photo.id = photoId;
+
+//     // 4
+//     res.send({ photo })
+//   })
+// })
 
 app.delete('/api/photos/:id', (req, res) => {
   const id = req.params.id;
