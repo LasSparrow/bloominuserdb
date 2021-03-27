@@ -31,15 +31,6 @@ app.post('/login', function(req, res) {
   res.send({ accessToken: accessToken })
 })
 
-// Create a new user
-app.post('/login', function(req, res) {
-  // save the user to the database
-
-  // Create an jwt from the user details and send the token back to the client
-  const accessToken = jwt.generateToken({Email: user.Email, Pass: user.Pass})
-  res.send({ accessToken: accessToken })
-})
-
 
 
 
