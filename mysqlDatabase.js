@@ -43,6 +43,42 @@ function createUser(user, callback) {
 }
 exports.createUser = createUser
 
+function getUser(Email, Pass, callback) {
+  // 1
+  const query = `
+    SELECT Email, Pass
+    FROM users
+    WHERE Email = ?
+    AND Pass = ?
+  `
+
+  // 2
+  const params = [Email, Pass]
+
+  // 3
+  connection.query(query, params, (error, result, fields) => {
+    if (!results || results.length === 0) {
+      callback(Error("Incorrect Email"))
+      return
+    }
+    const Email = results[0]
+    console.log(Email)
+    bcrypt.compare(Email, users.Email, (error, same) => {
+      if (error) {
+        callback(error)
+        return
+      }
+      if (!same) {
+        callback(Error("incorrect password"))
+        return
+      }
+      callback(null, Email)
+    })
+    
+  })
+}
+exports.getUser = getUser
+
 
 function deleteUser(userId, callback) {
 
