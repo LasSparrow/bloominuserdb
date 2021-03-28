@@ -24,7 +24,7 @@ app.use('/', function (req, res, next) {
 
 app.use(express.json())
 
-app.post('/api/users', async (req, res) =>{
+app.post('/api/users/login', async (req, res) =>{
   try {
     const hashedPassword = await bcrypt.hash(req.body.Pass, 10)
     const user = {Email: req.body.Email, Pass: hashedPassword}
