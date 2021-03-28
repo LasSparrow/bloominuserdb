@@ -1,5 +1,6 @@
 const express = require('express')
 const jwt = require('./jwt')
+const cors = require('cors')
 const database = require('./mysqlDatabase')
 const bcrypt = require('bcrypt')
 const multer = require('multer')
